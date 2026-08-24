@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "main_api"
-version = "0.0.0"
+name = "shiro_main_api"
+version = "0.1.0"
 description = "declares main api tasks"
 authors = ["AndrewCh <andrey.chikin1223@gmail.com>"]
 license = "MIT"

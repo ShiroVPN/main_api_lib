@@ -1,7 +1,7 @@
 from pydantic import AmqpDsn
 from taskiq_redis import RedisAsyncResultBackend
 
-from main_api.broker import (
+from shiro_main_api.broker import (
     BrokerConfigForClient,
     create_broker_for_client,
     define_broker,
@@ -20,8 +20,8 @@ define_broker(broker)
 
 # after define_broker was called
 
-from main_api.models import ClientGet
-from main_api.workers import get_client
+from shiro_main_api.models import ClientGet
+from shiro_main_api.workers import get_client
 
 
 async def main():

@@ -1,6 +1,6 @@
 from pydantic import AmqpDsn
 
-from main_api.broker import (
+from shiro_main_api.broker import (
     BrokerConfigForWorker,
     create_broker_for_worker,
     define_broker,
@@ -18,9 +18,9 @@ define_broker(broker)
 
 # after define_broker was called
 
-from main_api.models import Client, ClientGet
-from main_api.util import define_task
-from main_api.workers import get_client
+from shiro_main_api.models import Client, ClientGet
+from shiro_main_api.util import define_task
+from shiro_main_api.workers import get_client
 
 from .dependencies import db_dependency
 
