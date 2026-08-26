@@ -8,12 +8,14 @@ __all__ = [
 ]
 
 from aio_pika import ExchangeType
-from pydantic import AmqpDsn, BaseModel
+from pydantic import AmqpDsn, BaseModel, RedisDsn
 from taskiq_aio_pika import AioPikaBroker, Exchange, Queue
+from taskiq_redis import RedisAsyncResultBackend
 
 
 class BrokerConfigForClient(BaseModel):
     broker_url: AmqpDsn
+    result_backend_url: RedisDsn
     exchange_name: str
 
 
@@ -23,7 +25,11 @@ class BrokerConfigForWorker(BrokerConfigForClient):
 
 def create_broker_for_client(config: BrokerConfigForClient) -> AioPikaBroker:
     exchange = Exchange(name=config.exchange_name, type=ExchangeType.HEADERS)
-    broker = AioPikaBroker(url=str(config.broker_url), exchange=exchange)
+    broker = AioPikaBroker(
+        url=str(config.broker_url), exchange=exchange
+    ).with_result_backend(
+        RedisAsyncResultBackend(str(config.result_backend_url))
+    )
     return broker
 
 
